@@ -19,7 +19,8 @@ socket.on('connect', function() {
 
     // socket.emit('entrarChat', usuario); Si me acepta tengo que hacer un callback, por eso hago la función de abajo
     socket.emit('entrarChat', usuario, function(resp) {
-        console.log('Usuarios Conectados', resp);
+        //console.log('Usuarios Conectados', resp);
+        renderizarUsuarios(resp);
     })
 
 });
@@ -45,18 +46,21 @@ socket.on('enviarMensaje', function(mensaje) {
 
     console.log('Servidor:', mensaje);
 
+
 });
 
 // Escuchar broadcast administrador
 socket.on('crearMensaje', function(mensaje) {
 
-    console.log('Servidor:', mensaje);
+    renderizarMensajes(mensaje, false);
+    scrollBottom();
 
 });
 
 socket.on('listaPersonas', function(usuarios) {
 
-    console.log(usuarios);
+    // console.log(usuarios);
+    renderizarUsuarios(usuarios);
 
 });
 
